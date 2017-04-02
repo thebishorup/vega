@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
+using AutoMapper;
 
 namespace WebApplicationBasic
 {
@@ -32,6 +33,8 @@ namespace WebApplicationBasic
             // Add framework services.
             services.AddDbContext<VegaDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddAutoMapper();
 
             // Add framework services.
             services.AddMvc();
