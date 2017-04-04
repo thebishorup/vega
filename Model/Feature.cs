@@ -1,6 +1,6 @@
-namespace Vega.DTO 
+namespace Vega.Model 
 {
-    public class VehicleFeature
+    public class Feature
     {
         public int Id { get; set; }
         public string Name { get; set; }

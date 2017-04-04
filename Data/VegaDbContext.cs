@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Vega.DTO;
+using Vega.Model;
 
 namespace Vega.Data
 {
@@ -10,24 +10,24 @@ namespace Vega.Data
 
         }
 
-        public DbSet<VehicleMake> VehicleMakes { get; set; }
-        public DbSet<VehicleModel> VehicleModels { get; set; }
-        public DbSet<VehicleFeature> VehicleFeatures { get; set; }
+        public DbSet<Make> VehicleMakes { get; set; }
+        public DbSet<Modle> VehicleModels { get; set; }
+        public DbSet<Feature> VehicleFeatures { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
             //Customizing the EF Model
-            builder.Entity<VehicleMake>().ToTable("VehicleMake");
-            builder.Entity<VehicleModel>().ToTable("VehicleModel");
-            builder.Entity<VehicleFeature>().ToTable("VehicleFeature");
+            builder.Entity<Make>().ToTable("VehicleMake");
+            builder.Entity<Modle>().ToTable("VehicleModel");
+            builder.Entity<Feature>().ToTable("VehicleFeature");
 
             //Configure One-Many Relationship between VehicleMake & VehicleModel
-            builder.Entity<VehicleModel>()
-                .HasOne(make => make.VehicleMake)
-                .WithMany(model => model.VehicleModels)
-                .HasForeignKey(fk => fk.VehicleMakeId);
+            builder.Entity<Modle>()
+                .HasOne(make => make.Make)
+                .WithMany(model => model.Models)
+                .HasForeignKey(fk => fk.MakeId);
         }
     }
 }
