@@ -1,6 +1,9 @@
 export interface AddVehicleViewModel {
     make?: string;
     model?: string;
-    features?: string;
     isregistered?: boolean;
+    features?: string[];
+    contactName: string;
+    contactPhone: string;
+    contactEmail: string;
 }

@@ -2,65 +2,6 @@
 <hr/>
 <div class="row">
     <div class="col-sm-6">
-        <form [formGroup] = "addVehicleForm" nonvalidate>
-            <div class="form-group">
-                <label for="exampleSelect1">Make</label>
-                <select class="form-control" id="ddlMake" formControlName="make">
-                    <option value="0">-- Select Make --</option>
-                    <option *ngFor="let m of _make" value={{m.id}}>{{m.name}}</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="exampleSelect1">Model</label>
-                <select class="form-control" id="exampleSelect1">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="exampleInputEmail1">Is this vehicle registered?</label>
-                <div class="custom-controls-stacked">
-                    <label class="custom-control custom-radio">
-                        <input id="radioStacked1" name="radio-stacked" type="radio" class="custom-control-input">
-                        <span class="custom-control-description">Yes</span>
-                    </label>
-                    <label class="custom-control custom-radio">
-                        <input id="radioStacked2" name="radio-stacked" type="radio" class="custom-control-input">
-                        <span class="custom-control-description">No</span>
-                    </label>
-                </div>
-            </div>
-            <div class="form-group">
-                <label>Features</label>
-
-                <div class="form-check">
-                    <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input">
-                        Check me out
-                    </label>
-                </div>
-
-            </div>
-            <div class="form-group">
-                <label for="ContactName">Contact Name</label>
-                <input type="email" class="form-control" id="ContactName" aria-describedby="" placeholder="Enter contact name">
-                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-            </div>
-            <div class="form-group">
-                <label for="ContactPhone">Contact Phone</label>
-                <input type="phone" class="form-control" id="ContactPhone" aria-describedby="phoneHelp" placeholder="Enter contact phone">
-                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-            </div>
-            <div class="form-group">
-                <label for="ContactEmail">Contact Email</label>
-                <input type="email" class="form-control" id="ContactEmail" aria-describedby="emailHelp" placeholder="Enter contact email">
-                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-            </div>
-            
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+        
     </div>
 </div>
