@@ -1,8 +1,6 @@
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using vega.Persistence;
 using Vega.Data;
 using Vega.Model;
