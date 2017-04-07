@@ -8,7 +8,7 @@ namespace vega.Data.Repository
     public interface IRepository<TEntity> where TEntity : class
     {
          TEntity Get(int id);
-         Task<IEnumerable<TEntity>> GetAll();
+         IEnumerable<TEntity> GetAll();
          IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
          TEntity SingleOrDefault(Expression<Func<TEntity, bool>> predicate);
          void Add(TEntity entity);

@@ -38,9 +38,9 @@ namespace vega.Persistence.Repository
             return _entities.Find(id);
         }
 
-        async Task<IEnumerable<TEntity>> IRepository<TEntity>.GetAll()
+        IEnumerable<TEntity> IRepository<TEntity>.GetAll()
         {
-            return await _entities.ToListAsync();
+            return _entities.ToList();
         }
 
         void IRepository<TEntity>.Remove(TEntity entity)
