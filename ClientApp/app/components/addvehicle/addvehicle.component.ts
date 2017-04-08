@@ -1,8 +1,8 @@
 import { VehicleService } from './vehicle.service';
 import { AddVehicleViewModel } from './addvehicleviewmodel.interface';
-import { Feature } from './feature';
-import { Model } from './model';
-import { Make } from './make';
+import { IFeature } from './feature.interface';
+import { IModel } from './model.interface';
+import { IMake } from './make.interface';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
@@ -18,35 +18,30 @@ export class AddvehicleComponent implements OnInit {
     public submitted: boolean; //keeping track whether form submitted
     public event: any[] = []; //use latter to display the form changes
 
-    selectedMake: Make = new Make(0, 'Accura');
-    _make: Make[];
-    selectedModel: Model;
-    _model: Model[];
-    _feature: Feature[];
+    _make: IMake[];
+    _model: IModel[];
+    _feature: IFeature[];
 
     constructor(private _vehicleService: VehicleService) {
-        this._make = this._vehicleService.getMake();
+        this._vehicleService.getMakes()
+            .subscribe(makes => console.log(makes));
+
+        this._vehicleService.getModelsById(1)
+            .subscribe(models => console.log(models));
+
+        this._vehicleService.getFeatures()
+            .subscribe(features => console.log(features));
     }
 
     ngOnInit() {
-        //Initialize the ViewModel here [Template Driven]
-        this.vehicleViewModel = {
-            make: null,
-            model: null,
-            isregistered: true,
-            features: [],
-            contactName: '',
-            contactPhone: '',
-            contactEmail: ''
-        }
+        
      }
 
      OnChangeMakeGetModel(id: number) {
-        this._model = this._vehicleService.getModel().filter((item) => item.makeid == id);
-        this.selectedModel = new Model(this._model[0].id, this._model[0].name, this._model[0].makeid);
+
      }
 
-     public saveVehicle(isValid: boolean, f: AddVehicleViewModel) 
+     public saveVehicle(isValid: boolean, f: any) 
      {
          console.log(f);
      }

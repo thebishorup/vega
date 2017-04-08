@@ -8,5 +8,6 @@ public class MappingProfile : Profile
     {
         CreateMap<Make, MakeViewModel>();
         CreateMap<Modle, ModelViewModel>();
+        CreateMap<Feature, FeatureViewModel>();
     }
 }

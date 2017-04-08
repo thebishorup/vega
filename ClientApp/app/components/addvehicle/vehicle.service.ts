@@ -1,36 +1,51 @@
 import { Injectable } from '@angular/core';
-import  { Make } from './make';
-import { Model } from './model';
-import { Feature } from './feature';
+import { Http } from '@angular/http';
+import { Subject, Observable } from 'rxjs/Rx';
+
+import  { IMake } from './make.interface';
+import { IModel } from './model.interface';
+import { IFeature } from './feature.interface';
 
 @Injectable()
 export class VehicleService {
 
-    constructor() { }
+    makes: IMake[];
+    models: IModel[];
+    features: IFeature[];
 
-    getMake() 
+    constructor(private _http: Http) {
+
+     }
+
+    getMakes(): Observable<IMake[]>
     {
-        return [
-            new Make(1, 'Accura'),
-            new Make(2, 'BMW'),
-            new Make(3, 'Chrysler')
-        ];
+        return this._http.get("/api/makes").map(
+            (response) => {
+                return <IMake[]>response.json();
+            } 
+        ).catch(this.handleError);
     }
 
-    getModel() 
+    getModelsById(id: number): Observable<IModel[]>
     {
-        return [
-            new Model(1, 'TL', 1),
-            new Model(2, 'E4', 2),
-            new Model(5, 'Speedy', 3)
-        ];
+        return this._http.get("/api/models/" + id).map(
+            (respose) => {
+                return <IModel[]>respose.json();
+            }
+        ).catch(this.handleError);
     }
 
-    getFeature()
+    getFeatures(): Observable<IFeature[]>
     {
-        return [
-            new Feature(1, 'Smooth'),
-            new Feature(2, 'Speedy')
-        ];
+        return this._http.get("/api/features").map(
+            (response) => {
+                return <IFeature[]>response.json();
+            }
+        ).catch(this.handleError);
+    }
+
+    private handleError(error: Response)
+    {
+        return Observable.throw(error.statusText);
     }
 }

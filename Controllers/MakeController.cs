@@ -23,7 +23,7 @@ namespace vega.Controllers
         [HttpGet("/api/makes")]
         public IEnumerable<MakeViewModel> GetMakes()
         {
-            List<Make> makes = new List<Make>(_unitOfWork.Makes.GetAll());
+            List<Make> makes = new List<Make>(_unitOfWork.Makes.GetAllMakesWithModels());
             return mapper.Map<List<Make>, List<MakeViewModel>>(makes);
         }
 
@@ -41,5 +41,11 @@ namespace vega.Controllers
             return mapper.Map<List<Modle>, List<ModelViewModel>>(models);
         }
 
+        [HttpGet("/api/features")]
+        public IEnumerable<FeatureViewModel> GetFeatures()
+        {
+            List<Feature> features = new List<Feature>(_unitOfWork.Features.GetAll());
+            return mapper.Map<List<Feature>, List<FeatureViewModel>>(features);
+        }
     }
 }
