@@ -2,6 +2,48 @@
 <hr/>
 <div class="row">
     <div class="col-sm-6">
-        
+        <form [formGroup]="vehicleForm" (ngSubmit)="saveVehicle()" novalidate>
+            <!--Makes-->
+            <div class="form-group">
+                <label for="ddlMake">Make</label>
+                <select class="form-control" id="ddlMake" formControlName = "make" (change) = "onChangeMakeGetModel()">
+                    <option *ngFor = "let make of _make" [value] = "make.id">{{ make.name }}</option>
+                </select>
+            </div>
+            <!--Models-->
+            <div class="form-group">
+                <label for="ddlMake">Model</label>
+                <select class="form-control" id="ddlMake" formControlName = "model">
+                    <option *ngFor = "let model of _model" [value] = "model.id">{{ model.name }}</option>
+                </select>
+            </div>
+            <!--Registration-->
+            <div class="form-group">
+                <label>Is this vehicle registered?</label>
+                <div class="">
+                    <label class="custom-control custom-radio">
+                        <input id="isRegistered" value = "true" type="radio" formControlName = "isRegistered">
+                        Yes
+                    </label>
+                    <label class="custom-control custom-radio">
+                        <input id="isNotRegistered" value = "false" type="radio" formControlName = "isRegistered">
+                        No
+                    </label>
+                </div>
+            </div>
+            <!--Features-->
+            <div class="form-group">
+                <label>Features</label>
+                <div class="form-check" *ngFor = "let feature of _feature">
+                    <label class="form-check-label">
+                        <input type="checkbox" [value] = "feature.id" class="form-check-input" (change) = "onCheckboxChange($event.target.value)">
+                        {{ feature.name }}
+                    </label>
+                </div>
+            </div>
+        </form>
+        <pre>
+            {{ vehicleForm.value | json }}
+        </pre>
     </div>
 </div>

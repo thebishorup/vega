@@ -14,7 +14,7 @@ import { Observable } from 'rxjs/Rx';
 
 export class AddvehicleComponent implements OnInit {
 
-    public vehicleViewModel: AddVehicleViewModel;
+    vehicleForm: FormGroup;
 
     public submitted: boolean; //keeping track whether form submitted
     public event: any[] = []; //use latter to display the form changes
@@ -23,37 +23,90 @@ export class AddvehicleComponent implements OnInit {
     _model;
     _feature;
 
-    constructor(private _vehicleService: VehicleService) {
-        
+    constructor(private _vehicleService: VehicleService, private _fb: FormBuilder) {
+
     }
 
     ngOnInit() {
+        this.createForm();
+
         this._vehicleService.getMakes()
             .subscribe(makes => {
                 this._make = makes;
-                console.log("MAKES", this._make);
             });
-
-
-        this._vehicleService.getModelsById(1)
-            .subscribe(models => {
-                this._model = models;
-                console.log("MODELS", this._model);
-            });
-
 
         this._vehicleService.getFeatures()
             .subscribe(features => {
                 this._feature = features;
-                console.log("FEATURES", this._feature);
             });
     }
 
-    OnChangeMakeGetModel(id: number) {
+    onChangeMakeGetModel() {
 
+        var makeId = this.vehicleForm.get("make").value;
+
+        this._vehicleService.getModelsById(makeId)
+            .subscribe(models => {
+                this._model = models;
+            });
+            
     }
 
-    public saveVehicle(isValid: boolean, f: any) {
-        console.log(f);
+    onCheckboxChange(id: number) {
+        
+        //Get the current value(s) of features
+        let currentRegisteredFeatures = this.vehicleForm.get("features").value;
+
+        //Insert value into new array if no value present
+        if (currentRegisteredFeatures === null) {
+
+            let array = [];
+            array.push(id);
+
+            this.vehicleForm.patchValue({
+                features: array
+            })
+        }
+        else
+        {
+            var existedArray = [];
+            //Convert the current feature value into array
+            existedArray = currentRegisteredFeatures;
+
+            //Check if value existed
+            var index = existedArray.indexOf(id);
+
+            if(index < 0)
+            {
+                //Insert if doesnot exists
+                existedArray.push(id);
+            }
+            else
+            {
+                //Remove if already exist
+                existedArray.splice(index, 1);
+            }
+            
+            //updat feature to the vahicleForm
+            this.vehicleForm.patchValue({
+                features: existedArray
+            })
+        }
+    }
+
+    createForm() {
+        this.vehicleForm = this._fb.group({
+            make: '',
+            model: '',
+            isRegistered: '',
+            features: [],
+            contactName: '',
+            contactPhone: '',
+            contactEmail: ''
+        });
+    }
+
+    public saveVehicle() {
+        console.log(this.vehicleForm.value);
     }
 }
