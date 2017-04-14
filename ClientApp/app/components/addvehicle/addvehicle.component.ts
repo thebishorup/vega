@@ -16,9 +16,6 @@ export class AddvehicleComponent implements OnInit {
 
     vehicleForm: FormGroup;
 
-    public submitted: boolean; //keeping track whether form submitted
-    public event: any[] = []; //use latter to display the form changes
-
     _make;
     _model;
     _feature;
@@ -49,7 +46,7 @@ export class AddvehicleComponent implements OnInit {
             .subscribe(models => {
                 this._model = models;
             });
-            
+
     }
 
     onCheckboxChange(id: number) {
