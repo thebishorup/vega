@@ -93,13 +93,13 @@ export class AddvehicleComponent implements OnInit {
 
     createForm() {
         this.vehicleForm = this._fb.group({
-            make: '',
-            model: '',
-            isRegistered: '',
+            make: ['', Validators.required],
+            model: ['', Validators.required],
+            isRegistered: ['', Validators.required],
             features: [],
-            contactName: '',
-            contactPhone: '',
-            contactEmail: ''
+            contactName: ['', Validators.required],
+            contactPhone: ['', Validators.required],
+            contactEmail: ['', Validators.required]
         });
     }
 

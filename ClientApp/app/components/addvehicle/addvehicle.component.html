@@ -41,9 +41,30 @@
                     </label>
                 </div>
             </div>
+            <!--Contact Name-->
+            <div class="form-group">
+                <label for="ContactName">Contact Name</label>
+                <input type="email" formControlName = "contactName" class="form-control" id="ContactName" placeholder="Enter contact name">
+                <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+            </div>
+            <!--Contact phone-->
+            <div class="form-group">
+                <label for="ContactPhone">Contact Phone</label>
+                <input type="phone" formControlName = "contactPhone" class="form-control" id="ContactPhone" placeholder="Enter contact phone">
+                <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+            </div>
+            <!--Contact Email-->
+            <div class="form-group">
+                <label for="ContactEmail">Contact Email</label>
+                <input type="email" formControlName = "contactEmail" class="form-control" id="ContactEmail" placeholder="Enter contact email">
+                <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+            </div>
+            <button type="submit" [disabled] = "!vehicleForm.valid" class="btn btn-primary">Submit</button>
         </form>
+    </div>
+    <div class="col-sm-6">
         <pre>
-            {{ vehicleForm.value | json }}
+            {{ vehicleForm.value | json }} {{ vehicleForm.valid | json }}
         </pre>
     </div>
 </div>
