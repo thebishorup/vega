@@ -1,21 +1,39 @@
 <h3>Add Vehicle</h3>
 <hr/>
 <div class="row">
-    <div class="col-sm-6">
+    <div class="col-sm-6 col-xs-12">
         <form [formGroup]="vehicleForm" (ngSubmit)="saveVehicle()" novalidate>
             <!--Makes-->
             <div class="form-group">
                 <label for="ddlMake">Make</label>
-                <select class="form-control" id="ddlMake" formControlName = "make" (change) = "onChangeMakeGetModel()">
+                <select class="form-control" id="ddlMake" formControlName="make" (change)="onChangeMakeGetModel()">
                     <option *ngFor = "let make of _make" [value] = "make.id">{{ make.name }}</option>
                 </select>
+                <!--Error Handling: Start-->
+                <span class="help-block" *ngIf="(vehicleForm.get('make').touched ||
+                                                   vehicleForm.get('make').dirty) &&
+                                                   vehicleForm.get('make').errors">
+                    <span *ngIf = "vehicleForm.get('make').errors.required">
+                        Please choose make of the vehicle.
+                    </span>
+                </span>
+                <!--Error Handling: End-->
             </div>
             <!--Models-->
             <div class="form-group">
                 <label for="ddlMake">Model</label>
-                <select class="form-control" id="ddlMake" formControlName = "model">
+                <select class="form-control" id="ddlMake" formControlName="model">
                     <option *ngFor = "let model of _model" [value] = "model.id">{{ model.name }}</option>
                 </select>
+                <!--Error Handling: Start-->
+                <span class="help-block" *ngIf="(vehicleForm.get('model').touched ||
+                                                   vehicleForm.get('model').dirty) &&
+                                                   vehicleForm.get('model').errors">
+                    <span *ngIf = "vehicleForm.get('model').errors.required">
+                        Please choose model of the vehicle.
+                    </span>
+                </span>
+                <!--Error Handling: End-->
             </div>
             <!--Registration-->
             <div class="form-group">
@@ -30,39 +48,88 @@
                         No
                     </label>
                 </div>
+                <!--Error Handling: Start-->
+                <span class="help-block" *ngIf="(vehicleForm.get('isRegistered').touched ||
+                                                   vehicleForm.get('isRegistered').dirty) &&
+                                                   vehicleForm.get('isRegistered').errors">
+                    <span *ngIf = "vehicleForm.get('isRegistered').errors.required">
+                        Please choose if vehicle is registered.
+                    </span>
+                </span>
+                <!--Error Handling: End-->
             </div>
             <!--Features-->
             <div class="form-group">
                 <label>Features</label>
-                <div class="form-check" *ngFor = "let feature of _feature">
+                <div class="form-check" *ngFor="let feature of _feature">
                     <label class="form-check-label">
                         <input type="checkbox" [value] = "feature.id" class="form-check-input" (change) = "onCheckboxChange($event.target.value)">
                         {{ feature.name }}
                     </label>
                 </div>
+                <!--Error Handling: Start-->
+                <span class="help-block" *ngIf="(vehicleForm.get('features').touched ||
+                                                   vehicleForm.get('features').dirty) &&
+                                                   vehicleForm.get('features').errors">
+                    <span *ngIf = "vehicleForm.get('features').errors.required">
+                        Please choose at least one feature.
+                    </span>
+                </span>
+                <!--Error Handling: End-->
             </div>
             <!--Contact Name-->
             <div class="form-group">
                 <label for="ContactName">Contact Name</label>
-                <input type="email" formControlName = "contactName" class="form-control" id="ContactName" placeholder="Enter contact name">
-                <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+                <input type="email" formControlName="contactName" class="form-control" id="ContactName" placeholder="Enter contact name">
+                <!--Error Handling: Start-->
+                <span class="help-block" *ngIf="(vehicleForm.get('contactName').touched ||
+                                                   vehicleForm.get('contactName').dirty) &&
+                                                   vehicleForm.get('contactName').errors">
+                    <span *ngIf = "vehicleForm.get('contactName').errors.required">
+                        Please enter your full name.
+                    </span>
+                </span>
+                <!--Error Handling: End-->
             </div>
             <!--Contact phone-->
             <div class="form-group">
                 <label for="ContactPhone">Contact Phone</label>
-                <input type="phone" formControlName = "contactPhone" class="form-control" id="ContactPhone" placeholder="Enter contact phone">
-                <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+                <input type="phone" formControlName="contactPhone" class="form-control" id="ContactPhone" placeholder="Enter contact phone">
+                <!--Error Handling: Start-->
+                <span class="help-block" *ngIf="(vehicleForm.get('contactPhone').touched ||
+                                                   vehicleForm.get('contactPhone').dirty) &&
+                                                   vehicleForm.get('contactPhone').errors">
+                    <span *ngIf = "vehicleForm.get('contactPhone').errors.required">
+                        Please enter your phone number.
+                    </span>
+                    <span *ngIf = "vehicleForm.get('contactPhone').errors.pattern">
+                        Please enter valid phone number.
+                    </span>
+                </span>
+                <!--Error Handling: End-->
             </div>
             <!--Contact Email-->
             <div class="form-group">
                 <label for="ContactEmail">Contact Email</label>
-                <input type="email" formControlName = "contactEmail" class="form-control" id="ContactEmail" placeholder="Enter contact email">
-                <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+                <input type="email" formControlName="contactEmail" class="form-control" id="ContactEmail" placeholder="Enter contact email">
+                <!--Error Handling: Start-->
+                <span class="help-block" *ngIf="(vehicleForm.get('contactEmail').touched ||
+                                                   vehicleForm.get('contactEmail').dirty) &&
+                                                   vehicleForm.get('contactEmail').errors">
+                    <span *ngIf = "vehicleForm.get('contactEmail').errors.required">
+                        Please enter your email address.
+                    </span>
+                    <span *ngIf = "vehicleForm.get('contactEmail').errors.pattern">
+                        Please enter valid email address.
+                    </span>
+                    <!--TODO: Email validator-->
+                </span>
+                <!--Error Handling: End-->
             </div>
-            <button type="submit" [disabled] = "!vehicleForm.valid" class="btn btn-primary">Submit</button>
+            <button type="submit" [disabled]="!vehicleForm.valid" class="btn btn-primary">Submit</button>
         </form>
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-6 col-xs-12">
         <pre>
             {{ vehicleForm.value | json }} {{ vehicleForm.valid | json }}
         </pre>

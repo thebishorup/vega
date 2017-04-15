@@ -96,10 +96,10 @@ export class AddvehicleComponent implements OnInit {
             make: ['', Validators.required],
             model: ['', Validators.required],
             isRegistered: ['', Validators.required],
-            features: [],
+            features: [[], Validators.required],
             contactName: ['', Validators.required],
-            contactPhone: ['', Validators.required],
-            contactEmail: ['', Validators.required]
+            contactPhone: ['', [Validators.required, Validators.pattern('[0-9]+')]],
+            contactEmail: ['', [Validators.required, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+")]]
         });
     }
 
