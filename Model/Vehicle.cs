@@ -1,22 +1,18 @@
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using Vega.Model;
 
-namespace vega.ViewModel
+namespace vega.Model
 {
-    public class VehicleViewModel
+    public class Vehicle
     {
-        [Required]
+        public int Id { get; set; }
         public int Make { get; set; }
-        
         public int Model { get; set; }
         public bool IsRegistered { get; set; }
-        public List<int> Features { get; set; }
-        
-        [Required]
         public string ContactName { get; set; }
-        
-        [Required]
         public string ContactPhone { get; set; }
         public string ContactEmail { get; set; }
+
+        public List<VehicleFeature> VehicleFeatures { get; set; }
     }
 }

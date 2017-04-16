@@ -20,7 +20,7 @@ namespace vega.Persistence.Repository
 
         public IEnumerable<Make> GetAllMakesWithModels()
         {
-            return VegaDbContext.VehicleMakes
+            return VegaDbContext.Makes
                 .Include(model => model.Models);
         }
     }
