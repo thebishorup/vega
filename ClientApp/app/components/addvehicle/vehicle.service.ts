@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Subject, Observable } from 'rxjs/Rx';
 
 @Injectable()
@@ -25,6 +25,16 @@ export class VehicleService {
         return this._http.get("/api/features").map(
             response => response.json()
         ).catch(this.handleError);
+    }
+
+    saveVehicle(vehicleModel)
+    {
+        let bodyString = JSON.stringify(vehicleModel);
+        let headers = new Headers({ 'Content-Type': 'application/json' }); 
+        let options = new RequestOptions({ headers: headers });
+
+        return this._http.post('/api/vehicle/create', bodyString, options)
+                   .toPromise().catch(this.handleError);
     }
 
     private handleError(error: Response) {

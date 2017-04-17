@@ -8,6 +8,7 @@ namespace vega.Data
          IMakeRepository Makes { get; }
          IModelRepository Models { get; }
          IFeatureRepository Features { get; }
+         IVehicleRepository Vehicles { get; }
 
          int Complete();
     }

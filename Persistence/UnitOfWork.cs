@@ -15,12 +15,14 @@ namespace vega.Persistence
             Makes = new MakeRepository(this.context);
             Models = new ModelRepository(this.context);
             Features = new FeatureRepository(this.context);
+            Vehicles = new VehicleRepository(this.context);
         }
         public IMakeRepository Makes { get; private set; }
 
         public IModelRepository Models { get; private set; }
 
-        public IFeatureRepository Features { get; private set; }        
+        public IFeatureRepository Features { get; private set; }   
+        public IVehicleRepository Vehicles { get; private set; }     
 
         int IUnitOfWork.Complete()
         {
