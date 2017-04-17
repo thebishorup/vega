@@ -78,6 +78,14 @@ namespace Vega.Data
                 .IsRequired()
                 .HasMaxLength(255);
 
+            builder.Entity<Vehicle>()
+                .Property(v => v.CreatedBy)
+                .HasMaxLength(255);
+
+            builder.Entity<Vehicle>()
+                .Property(v => v.Updatedby)
+                .HasMaxLength(255);
+
             #endregion
         }
     }
