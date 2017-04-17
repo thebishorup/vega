@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Subject, Observable } from 'rxjs/Rx';
+import { Vehicle } from "./Vehicle";
 
 @Injectable()
 export class VehicleService {
@@ -27,8 +28,9 @@ export class VehicleService {
         ).catch(this.handleError);
     }
 
-    saveVehicle(vehicleModel)
+    saveVehicle(vehicleModel: Vehicle)
     {
+        console.log(vehicleModel);
         let bodyString = JSON.stringify(vehicleModel);
         let headers = new Headers({ 'Content-Type': 'application/json' }); 
         let options = new RequestOptions({ headers: headers });

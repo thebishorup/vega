@@ -1,3 +1,4 @@
+import { Vehicle } from './Vehicle';
 import { VehicleService } from './vehicle.service';
 import { AddVehicleViewModel } from './addvehicleviewmodel.interface';
 import { IFeature } from './feature.interface';
@@ -104,6 +105,7 @@ export class AddvehicleComponent implements OnInit {
     }
 
     public saveVehicle() {
-        console.log(this.vehicleForm.value);
+        // console.log(this.vehicleForm.value);
+        this._vehicleService.saveVehicle(this.vehicleForm.value);
     }
 }
