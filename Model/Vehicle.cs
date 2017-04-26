@@ -19,6 +19,6 @@ namespace vega.Model
 
         public Modle Model { get; set; }
 
-        public List<VehicleFeature> VehicleFeatures { get; set; }
+        public List<VehicleFeature> Features { get; set; }
     }
 }

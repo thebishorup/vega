@@ -24,8 +24,8 @@ namespace Vega.Data
             builder.Entity<Make>().ToTable("Makes");
             builder.Entity<Modle>().ToTable("Modles");
             builder.Entity<Feature>().ToTable("Features");
-            builder.Entity<Vehicle>().ToTable("Vehicle");
-            builder.Entity<VehicleFeature>().ToTable("VehicleFeature");
+            builder.Entity<Vehicle>().ToTable("Vehicles");
+            builder.Entity<VehicleFeature>().ToTable("VehicleFeatures");
 
             #region EF Relatiosnhips Configurations
             //Configure One-Many Relationship between Make & Model
@@ -40,7 +40,7 @@ namespace Vega.Data
 
             builder.Entity<VehicleFeature>()
                 .HasOne(v => v.Vehicle)
-                .WithMany(v => v.VehicleFeatures)
+                .WithMany(v => v.Features)
                 .HasForeignKey(v => v.VehicleId);
 
             builder.Entity<VehicleFeature>()
@@ -64,10 +64,6 @@ namespace Vega.Data
                 .HasMaxLength(255);
 
             //Vehicle
-            builder.Entity<Vehicle>()
-                .Property(vehicle => vehicle.Make)
-                .IsRequired();
-
             builder.Entity<Vehicle>()
                 .Property(v => v.ContactName)
                 .IsRequired()
