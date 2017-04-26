@@ -7,8 +7,7 @@ namespace vega.Model
     public class Vehicle
     {
         public int Id { get; set; }
-        public int Make { get; set; }
-        public int Model { get; set; }
+        public int ModelId { get; set; }
         public bool IsRegistered { get; set; }
         public string ContactName { get; set; }
         public string ContactPhone { get; set; }
@@ -17,6 +16,8 @@ namespace vega.Model
         public DateTime CreatedDate { get; set; }
         public string Updatedby { get; set; }
         public DateTime UpdatedDate { get; set; }
+
+        public Modle Model { get; set; }
 
         public List<VehicleFeature> VehicleFeatures { get; set; }
     }
