@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using vega.Data;
 using vega.Model;
 using vega.ViewModel;
+using Vega.Data;
 
 namespace vega.Controllers
 {
@@ -25,30 +27,67 @@ namespace vega.Controllers
             return _mapper.Map<List<Vehicle>, List<VehicleViewModel>>(vehicles);
         }
 
-        [HttpPost()]
-        public IActionResult CreateVehicle([FromBody] VehicleViewModel vehicleViewModel)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetVehicle(int id)
         {
-            var vehicle = _mapper.Map<VehicleViewModel, Vehicle>(vehicleViewModel);
-            vehicle.CreatedDate = DateTime.Now;
-            vehicle.UpdatedDate = vehicle.CreatedDate;
-            _unitOfWork.Vehicles.Add(vehicle);
-            _unitOfWork.Complete();
+            var vehicle = await _unitOfWork.Vehicles.GetVehicleWithFeaturesAsync(id);
+            if(vehicle == null)
+                return NotFound();
 
             var result = _mapper.Map<Vehicle, VehicleViewModel>(vehicle);
 
             return Ok(result);
         }
 
-        [HttpPut("/api/vehicle/update")]
-        public IActionResult Update([FromBody] VehicleViewModel vehicleViewModel)
+        [HttpPost()]
+        public IActionResult CreateVehicle([FromBody] VehicleViewModel vehicleViewModel)
         {
-            return Ok();
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var vehicle = _mapper.Map<VehicleViewModel, Vehicle>(vehicleViewModel);
+            vehicle.CreatedDate = DateTime.Now;
+            vehicle.UpdatedDate = vehicle.CreatedDate;
+            _unitOfWork.Vehicles.Add(vehicle);
+            _unitOfWork.CompleteAsync();
+
+            var result = _mapper.Map<Vehicle, VehicleViewModel>(vehicle);
+
+            return Ok(result);
         }
 
-        [HttpDelete("/api/vehicle/delete/{id}")]
-        public IActionResult Delete(int id)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> VehicleUpdate(int id, [FromBody] VehicleViewModel vehicleViewModel)
         {
-            return Ok();
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            //Get the record from the database
+            var vehicle = await _unitOfWork.Vehicles.GetVehicleWithFeaturesAsync(id);
+
+            if(vehicle == null)
+                return NotFound();
+
+            _mapper.Map<VehicleViewModel, Vehicle>(vehicleViewModel, vehicle);
+
+            //save
+            await _unitOfWork.CompleteAsync();
+
+            var result = _mapper.Map<Vehicle, VehicleViewModel>(vehicle);
+            return Ok(result);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var vehicle = await _unitOfWork.Vehicles.GetAsync(id);
+
+            if(vehicle == null)
+                return NotFound();
+
+            _unitOfWork.Vehicles.Remove(vehicle);
+            await _unitOfWork.CompleteAsync();
+            return Ok(id);
         }
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using vega.Data.Repository;
 
 namespace vega.Data
@@ -10,6 +11,6 @@ namespace vega.Data
          IFeatureRepository Features { get; }
          IVehicleRepository Vehicles { get; }
 
-         int Complete();
+         Task<int> CompleteAsync();
     }
 }

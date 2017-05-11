@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace vega.ViewModel
 {
@@ -8,6 +9,11 @@ namespace vega.ViewModel
         public int ModelId { get; set; }
         public bool IsRegistered { get; set; }
         public ContactViewModel Contact { get; set; }
-        public List<int> Features { get; set; }
+        public ICollection<int> Features { get; set; }
+
+        public VehicleViewModel()
+        {
+            Features = new Collection<int>();
+        }
     }
 }

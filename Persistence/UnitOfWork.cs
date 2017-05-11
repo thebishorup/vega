@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using vega.Data;
 using vega.Data.Repository;
 using vega.Persistence.Repository;
@@ -24,9 +25,9 @@ namespace vega.Persistence
         public IFeatureRepository Features { get; private set; }   
         public IVehicleRepository Vehicles { get; private set; }     
 
-        int IUnitOfWork.Complete()
+        async Task<int> IUnitOfWork.CompleteAsync()
         {
-            return this.context.SaveChanges();
+            return await this.context.SaveChangesAsync();
         }
 
         void IDisposable.Dispose()

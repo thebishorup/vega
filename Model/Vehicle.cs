@@ -6,6 +6,10 @@ namespace vega.Model
 {
     public class Vehicle
     {
+        public Vehicle()
+        {
+            Features = new List<VehicleFeature>();
+        }
         public int Id { get; set; }
         public int ModelId { get; set; }
         public bool IsRegistered { get; set; }
