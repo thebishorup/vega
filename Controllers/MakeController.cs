@@ -25,10 +25,10 @@ namespace vega.Controllers
         }
 
         [HttpGet("/api/models/{id}")]
-        public IEnumerable<ModelViewModel> GetModelsByMakeId(int id)
+        public IEnumerable<KeyValuePairViewModel> GetModelsByMakeId(int id)
         {
             List<Modle> models = new List<Modle>(_unitOfWork.Models.Find(m => m.MakeId == id));
-            return _mapper.Map<List<Modle>, List<ModelViewModel>>(models);
+            return _mapper.Map<List<Modle>, List<KeyValuePairViewModel>>(models);
         }
     }
 }

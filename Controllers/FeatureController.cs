@@ -19,10 +19,10 @@ namespace vega.Controllers
         }
 
         [HttpGet("/api/features")]
-        public IEnumerable<FeatureViewModel> GetFeatures()
+        public IEnumerable<KeyValuePairViewModel> GetFeatures()
         {
             List<Feature> features = new List<Feature>(_unitOfWork.Features.GetAll());
-            return _mapper.Map<List<Feature>, List<FeatureViewModel>>(features);
+            return _mapper.Map<List<Feature>, List<KeyValuePairViewModel>>(features);
         }
     }
 }

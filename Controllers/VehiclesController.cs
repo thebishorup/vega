@@ -21,16 +21,16 @@ namespace vega.Controllers
             _mapper = mapper;
         }
 
-        public IEnumerable<VehicleViewModel> GetVehicles()
+        public IEnumerable<SaveVehicleViewModel> GetVehicles()
         {
             List<Vehicle> vehicles = new List<Vehicle>(_unitOfWork.Vehicles.GetAll());
-            return _mapper.Map<List<Vehicle>, List<VehicleViewModel>>(vehicles);
+            return _mapper.Map<List<Vehicle>, List<SaveVehicleViewModel>>(vehicles);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetVehicle(int id)
         {
-            var vehicle = await _unitOfWork.Vehicles.GetVehicleWithFeaturesAsync(id);
+            var vehicle = await _unitOfWork.Vehicles.GetVehicleAsync(id);
             if(vehicle == null)
                 return NotFound();
 
@@ -40,16 +40,18 @@ namespace vega.Controllers
         }
 
         [HttpPost()]
-        public IActionResult CreateVehicle([FromBody] VehicleViewModel vehicleViewModel)
+        public async Task<IActionResult> CreateVehicle([FromBody] SaveVehicleViewModel vehicleViewModel)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var vehicle = _mapper.Map<VehicleViewModel, Vehicle>(vehicleViewModel);
+            var vehicle = _mapper.Map<SaveVehicleViewModel, Vehicle>(vehicleViewModel);
             vehicle.CreatedDate = DateTime.Now;
             vehicle.UpdatedDate = vehicle.CreatedDate;
             _unitOfWork.Vehicles.Add(vehicle);
-            _unitOfWork.CompleteAsync();
+            await _unitOfWork.CompleteAsync();
+
+            vehicle = await _unitOfWork.Vehicles.GetVehicleAsync(vehicle.Id);
 
             var result = _mapper.Map<Vehicle, VehicleViewModel>(vehicle);
 
@@ -57,23 +59,23 @@ namespace vega.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> VehicleUpdate(int id, [FromBody] VehicleViewModel vehicleViewModel)
+        public async Task<IActionResult> VehicleUpdate(int id, [FromBody] SaveVehicleViewModel vehicleViewModel)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             //Get the record from the database
-            var vehicle = await _unitOfWork.Vehicles.GetVehicleWithFeaturesAsync(id);
+            var vehicle = await _unitOfWork.Vehicles.GetVehicleAsync(id);
 
             if(vehicle == null)
                 return NotFound();
 
-            _mapper.Map<VehicleViewModel, Vehicle>(vehicleViewModel, vehicle);
+            _mapper.Map<SaveVehicleViewModel, Vehicle>(vehicleViewModel, vehicle);
 
             //save
             await _unitOfWork.CompleteAsync();
 
-            var result = _mapper.Map<Vehicle, VehicleViewModel>(vehicle);
+            var result = _mapper.Map<Vehicle, SaveVehicleViewModel>(vehicle);
             return Ok(result);
         }
 

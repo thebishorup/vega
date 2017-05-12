@@ -43,7 +43,7 @@ namespace WebApplicationBasic
             services.AddMvc();
 
             // Register application services
-            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

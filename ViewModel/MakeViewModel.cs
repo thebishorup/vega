@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 
-namespace Vega.ViewModel
+namespace Vega.ViewModel 
 {
-    public class MakeViewModel
+    public class MakeViewModel : KeyValuePairViewModel
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public List<ModelViewModel> Models { get; set; }
+        public MakeViewModel()
+        {
+            Models = new List<KeyValuePairViewModel>();
+        }
+        public List<KeyValuePairViewModel> Models { get; set; }
     }
 }

@@ -23,9 +23,14 @@ namespace vega.Persistence.Repository
             return await VegaDbContext.Vehicles.FindAsync(id);
         }
 
-        async Task<Vehicle> IVehicleRepository.GetVehicleWithFeaturesAsync(int id)
+        async Task<Vehicle> IVehicleRepository.GetVehicleAsync(int id)
         {
-            return await VegaDbContext.Vehicles.Include(f => f.Features).SingleOrDefaultAsync(v => v.Id == id);
+            return await VegaDbContext.Vehicles
+            .Include(f => f.Features)
+                .ThenInclude(vf => vf.Feature)
+            .Include(m => m.Model)
+                .ThenInclude(m => m.Make)
+            .SingleOrDefaultAsync(v => v.Id == id);
         }
     }
 }
