@@ -99,7 +99,7 @@ export class AddvehicleComponent implements OnInit {
     createForm() {
         this.vehicleForm = this._fb.group({
             make: ['', Validators.required],
-            model: ['', Validators.required],
+            modelId: ['', Validators.required],
             isRegistered: ['', Validators.required],
             features: [[], Validators.required],
             contact: this._fb.group({
@@ -112,6 +112,7 @@ export class AddvehicleComponent implements OnInit {
 
     public saveVehicle() {
         // console.log(this.vehicleForm.value);
-        this._vehicleService.saveVehicle(this.vehicleForm.value);
+        this._vehicleService.saveVehicle(this.vehicleForm.value)
+            .subscribe(s => console.log(s));
     }
 }

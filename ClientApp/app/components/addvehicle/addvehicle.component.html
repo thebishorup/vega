@@ -22,14 +22,14 @@
             <!--Models-->
             <div class="form-group">
                 <label for="ddlMake">Model</label>
-                <select class="form-control" id="ddlMake" formControlName="model">
+                <select class="form-control" id="ddlMake" formControlName="modelId">
                     <option *ngFor = "let model of _model" [value] = "model.id">{{ model.name }}</option>
                 </select>
                 <!--Error Handling: Start-->
-                <span class="help-block" *ngIf="(vehicleForm.get('model').touched ||
-                                                   vehicleForm.get('model').dirty) &&
-                                                   vehicleForm.get('model').errors">
-                    <span *ngIf = "vehicleForm.get('model').errors.required">
+                <span class="help-block" *ngIf="(vehicleForm.get('modelId').touched ||
+                                                   vehicleForm.get('modelId').dirty) &&
+                                                   vehicleForm.get('modelId').errors">
+                    <span *ngIf = "vehicleForm.get('modelId').errors.required">
                         Please choose model of the vehicle.
                     </span>
                 </span>

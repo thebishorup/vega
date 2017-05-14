@@ -28,15 +28,14 @@ export class VehicleService {
         ).catch(this.handleError);
     }
 
-    saveVehicle(vehicleModel: Vehicle)
+    saveVehicle(vehicleModel)
     {
-        console.log(vehicleModel);
         let bodyString = JSON.stringify(vehicleModel);
         let headers = new Headers({ 'Content-Type': 'application/json' }); 
         let options = new RequestOptions({ headers: headers });
 
-        return this._http.post('/api/vehicle/create', bodyString, options)
-                   .toPromise().catch(this.handleError);
+        return this._http.post('/api/vehicles', bodyString, options)
+            .map(response => response.json()).catch(this.handleError);
     }
 
     private handleError(error: Response) {
