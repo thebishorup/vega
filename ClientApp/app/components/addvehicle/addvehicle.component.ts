@@ -42,7 +42,11 @@ export class AddvehicleComponent implements OnInit {
     onChangeMakeGetModel() {
 
         var makeId = this.vehicleForm.get("make").value;
-
+        //Empty the ModelId
+        this.vehicleForm.patchValue({
+            model: ''
+        });
+        
         this._vehicleService.getModelsById(makeId)
             .subscribe(models => {
                 this._model = models;
