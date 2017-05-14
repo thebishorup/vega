@@ -77,54 +77,56 @@
                 </span>
                 <!--Error Handling: End-->
             </div>
-            <!--Contact Name-->
-            <div class="form-group">
-                <label for="ContactName">Contact Name</label>
-                <input type="email" formControlName="contactName" class="form-control" id="ContactName" placeholder="Enter contact name">
-                <!--Error Handling: Start-->
-                <span class="help-block" *ngIf="(vehicleForm.get('contactName').touched ||
-                                                   vehicleForm.get('contactName').dirty) &&
-                                                   vehicleForm.get('contactName').errors">
-                    <span *ngIf = "vehicleForm.get('contactName').errors.required">
+            <div formGroupName="contact">
+                <!--Contact Name-->
+                <div class="form-group">
+                    <label for="Name">Contact Name</label>
+                    <input type="text" formControlName="name" class="form-control" id="Name" placeholder="Enter contact name">
+                    <!--Error Handling: Start-->
+                    <span class="help-block" *ngIf="(vehicleForm.get('contact').get('name').touched ||
+                                                   vehicleForm.get('contact').get('name').dirty) &&
+                                                   vehicleForm.get('contact').get('name').errors">
+                    <span *ngIf = "vehicleForm.get('contact').get('name').errors.required">
                         Please enter your full name.
                     </span>
-                </span>
-                <!--Error Handling: End-->
-            </div>
-            <!--Contact phone-->
-            <div class="form-group">
-                <label for="ContactPhone">Contact Phone</label>
-                <input type="phone" formControlName="contactPhone" class="form-control" id="ContactPhone" placeholder="Enter contact phone">
-                <!--Error Handling: Start-->
-                <span class="help-block" *ngIf="(vehicleForm.get('contactPhone').touched ||
-                                                   vehicleForm.get('contactPhone').dirty) &&
-                                                   vehicleForm.get('contactPhone').errors">
-                    <span *ngIf = "vehicleForm.get('contactPhone').errors.required">
+                    </span>
+                    <!--Error Handling: End-->
+                </div>
+                <!--Contact phone-->
+                <div class="form-group">
+                    <label for="Phone">Contact Phone</label>
+                    <input type="phone" formControlName="phone" class="form-control" id="Phone" placeholder="Enter contact phone">
+                    <!--Error Handling: Start-->
+                    <span class="help-block" *ngIf="(vehicleForm.get('contact').get('phone').touched ||
+                                                   vehicleForm.get('contact').get('phone').dirty) &&
+                                                   vehicleForm.get('contact').get('phone').errors">
+                    <span *ngIf = "vehicleForm.get('contact').get('phone').errors.required">
                         Please enter your phone number.
                     </span>
-                    <span *ngIf = "vehicleForm.get('contactPhone').errors.pattern">
+                    <span *ngIf="vehicleForm.get('contact').get('phone').errors.pattern">
                         Please enter valid phone number.
                     </span>
-                </span>
-                <!--Error Handling: End-->
-            </div>
-            <!--Contact Email-->
-            <div class="form-group">
-                <label for="ContactEmail">Contact Email</label>
-                <input type="email" formControlName="contactEmail" class="form-control" id="ContactEmail" placeholder="Enter contact email">
-                <!--Error Handling: Start-->
-                <span class="help-block" *ngIf="(vehicleForm.get('contactEmail').touched ||
-                                                   vehicleForm.get('contactEmail').dirty) &&
-                                                   vehicleForm.get('contactEmail').errors">
-                    <span *ngIf = "vehicleForm.get('contactEmail').errors.required">
+                    </span>
+                    <!--Error Handling: End-->
+                </div>
+                <!--Contact Email-->
+                <div class="form-group">
+                    <label for="Email">Contact Email</label>
+                    <input type="email" formControlName="email" class="form-control" id="Email" placeholder="Enter contact email">
+                    <!--Error Handling: Start-->
+                    <span class="help-block" *ngIf="(vehicleForm.get('contact').get('email').touched ||
+                                                   vehicleForm.get('contact').get('email').dirty) &&
+                                                   vehicleForm.get('contact').get('email').errors">
+                    <span *ngIf = "vehicleForm.get('contact').get('email').errors.required">
                         Please enter your email address.
                     </span>
-                    <span *ngIf = "vehicleForm.get('contactEmail').errors.pattern">
+                    <span *ngIf="vehicleForm.get('contact').get('email').errors.pattern">
                         Please enter valid email address.
                     </span>
                     <!--TODO: Email validator-->
-                </span>
-                <!--Error Handling: End-->
+                    </span>
+                    <!--Error Handling: End-->
+                </div>
             </div>
             <button type="submit" [disabled]="!vehicleForm.valid" class="btn btn-primary">Submit</button>
         </form>

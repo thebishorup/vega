@@ -102,9 +102,11 @@ export class AddvehicleComponent implements OnInit {
             model: ['', Validators.required],
             isRegistered: ['', Validators.required],
             features: [[], Validators.required],
-            contactName: ['', Validators.required],
-            contactPhone: ['', [Validators.required, Validators.pattern('[0-9]+')]],
-            contactEmail: ['', [Validators.required, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+")]]
+            contact: this._fb.group({
+                name: ['', Validators.required],
+                phone: ['', [Validators.required, Validators.pattern('[0-9]+')]],
+                email: ['', [Validators.required, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+")]]
+            })
         });
     }
 
