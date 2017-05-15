@@ -32,6 +32,7 @@ module.exports = (env) => {
                 'es6-promise',
                 'event-source-polyfill',
                 'jquery',
+                'raven-js',
                 'zone.js',
             ]
         },

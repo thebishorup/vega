@@ -35,7 +35,7 @@ export class VehicleService {
         let options = new RequestOptions({ headers: headers });
 
         return this._http.post('/api/vehicles', bodyString, options)
-            .map(response => response.json()).catch(this.handleError);
+            .map(response => response.json());//.catch(this.handleError);
     }
 
     private handleError(error: Response) {

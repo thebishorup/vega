@@ -1,10 +1,11 @@
-import { AppErrorHandler } from './app.error-handler';
 import { ErrorHandler } from '@angular/core';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { UniversalModule } from 'angular2-universal';
+import *  as Raven from 'raven-js';
 
+import { AppErrorHandler } from './app.error-handler';
 import { AppComponent } from './components/app/app.component'
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
@@ -13,8 +14,13 @@ import { CounterComponent } from './components/counter/counter.component';
 import { AddvehicleComponent } from "./components/addvehicle/addvehicle.component";
 import { VehicleService } from "./components/addvehicle/vehicle.service";
 
+//Configure Raven for Error logging
+Raven
+    .config('https://7e5707a5be1146b28bb546c3acd0317e@sentry.io/168098')
+    .install();
+
 @NgModule({
-    bootstrap: [ AppComponent ],
+    bootstrap: [AppComponent],
     declarations: [
         AppComponent,
         NavMenuComponent,
