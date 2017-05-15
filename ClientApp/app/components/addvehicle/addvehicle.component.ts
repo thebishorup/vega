@@ -113,6 +113,6 @@ export class AddvehicleComponent implements OnInit {
     public saveVehicle() {
         // console.log(this.vehicleForm.value);
         this._vehicleService.saveVehicle(this.vehicleForm.value)
-            .subscribe(s => console.log(s));
+            .subscribe(response => console.log(response));
     }
 }

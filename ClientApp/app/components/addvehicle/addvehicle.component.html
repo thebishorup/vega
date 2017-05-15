@@ -10,7 +10,7 @@
                     <option *ngFor = "let make of _make" [value] = "make.id">{{ make.name }}</option>
                 </select>
                 <!--Error Handling: Start-->
-                <span class="help-block" *ngIf="(vehicleForm.get('make').touched ||
+                <span class="alert-danger" *ngIf="(vehicleForm.get('make').touched ||
                                                    vehicleForm.get('make').dirty) &&
                                                    vehicleForm.get('make').errors">
                     <span *ngIf = "vehicleForm.get('make').errors.required">
@@ -26,7 +26,7 @@
                     <option *ngFor = "let model of _model" [value] = "model.id">{{ model.name }}</option>
                 </select>
                 <!--Error Handling: Start-->
-                <span class="help-block" *ngIf="(vehicleForm.get('modelId').touched ||
+                <span class="alert-danger" *ngIf="(vehicleForm.get('modelId').touched ||
                                                    vehicleForm.get('modelId').dirty) &&
                                                    vehicleForm.get('modelId').errors">
                     <span *ngIf = "vehicleForm.get('modelId').errors.required">
@@ -49,7 +49,7 @@
                     </label>
                 </div>
                 <!--Error Handling: Start-->
-                <span class="help-block" *ngIf="(vehicleForm.get('isRegistered').touched ||
+                <span class="alert-danger" *ngIf="(vehicleForm.get('isRegistered').touched ||
                                                    vehicleForm.get('isRegistered').dirty) &&
                                                    vehicleForm.get('isRegistered').errors">
                     <span *ngIf = "vehicleForm.get('isRegistered').errors.required">
@@ -68,7 +68,7 @@
                     </label>
                 </div>
                 <!--Error Handling: Start-->
-                <span class="help-block" *ngIf="(vehicleForm.get('features').touched ||
+                <span class="alert-danger" *ngIf="(vehicleForm.get('features').touched ||
                                                    vehicleForm.get('features').dirty) &&
                                                    vehicleForm.get('features').errors">
                     <span *ngIf = "vehicleForm.get('features').errors.required">
@@ -83,7 +83,7 @@
                     <label for="Name">Contact Name</label>
                     <input type="text" formControlName="name" class="form-control" id="Name" placeholder="Enter contact name">
                     <!--Error Handling: Start-->
-                    <span class="help-block" *ngIf="(vehicleForm.get('contact').get('name').touched ||
+                    <span class="alert-danger" *ngIf="(vehicleForm.get('contact').get('name').touched ||
                                                    vehicleForm.get('contact').get('name').dirty) &&
                                                    vehicleForm.get('contact').get('name').errors">
                     <span *ngIf = "vehicleForm.get('contact').get('name').errors.required">
@@ -97,7 +97,7 @@
                     <label for="Phone">Contact Phone</label>
                     <input type="phone" formControlName="phone" class="form-control" id="Phone" placeholder="Enter contact phone">
                     <!--Error Handling: Start-->
-                    <span class="help-block" *ngIf="(vehicleForm.get('contact').get('phone').touched ||
+                    <span class="alert-danger" *ngIf="(vehicleForm.get('contact').get('phone').touched ||
                                                    vehicleForm.get('contact').get('phone').dirty) &&
                                                    vehicleForm.get('contact').get('phone').errors">
                     <span *ngIf = "vehicleForm.get('contact').get('phone').errors.required">
@@ -114,7 +114,7 @@
                     <label for="Email">Contact Email</label>
                     <input type="email" formControlName="email" class="form-control" id="Email" placeholder="Enter contact email">
                     <!--Error Handling: Start-->
-                    <span class="help-block" *ngIf="(vehicleForm.get('contact').get('email').touched ||
+                    <span class="alert-danger" *ngIf="(vehicleForm.get('contact').get('email').touched ||
                                                    vehicleForm.get('contact').get('email').dirty) &&
                                                    vehicleForm.get('contact').get('email').errors">
                     <span *ngIf = "vehicleForm.get('contact').get('email').errors.required">

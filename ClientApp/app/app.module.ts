@@ -1,3 +1,5 @@
+import { AppErrorHandler } from './app.error-handler';
+import { ErrorHandler } from '@angular/core';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -22,6 +24,7 @@ import { VehicleService } from "./components/addvehicle/vehicle.service";
         AddvehicleComponent
     ],
     providers: [
+        { provide: ErrorHandler, useClass: AppErrorHandler },
         VehicleService
     ],
     imports: [
