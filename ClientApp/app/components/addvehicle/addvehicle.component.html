@@ -40,11 +40,11 @@
                 <label>Is this vehicle registered?</label>
                 <div class="">
                     <label class="custom-control custom-radio">
-                        <input id="isRegistered" value = "true" type="radio" formControlName = "isRegistered">
+                        <input id="isRegistered" [value] = "true" type="radio" formControlName = "isRegistered">
                         Yes
                     </label>
                     <label class="custom-control custom-radio">
-                        <input id="isNotRegistered" value = "false" type="radio" formControlName = "isRegistered">
+                        <input id="isNotRegistered" [value] = "false" type="radio" formControlName = "isRegistered">
                         No
                     </label>
                 </div>
@@ -63,8 +63,10 @@
                 <label>Features</label>
                 <div class="form-check" *ngFor="let feature of _feature">
                     <label class="form-check-label">
-                        <input type="checkbox" [value] = "feature.id" class="form-check-input" (change) = "onCheckboxChange($event.target.value)">
-                        {{ feature.name }}
+                        <input type="checkbox" [value] = "feature.id" class="form-check-input" 
+                        (change) = "onCheckboxChange($event.target.value)" 
+                        [checked] = "featuresArray.includes(feature.id)">
+                        {{ feature.name + " id: " + feature.id }}
                     </label>
                 </div>
                 <!--Error Handling: Start-->
@@ -129,11 +131,13 @@
                 </div>
             </div>
             <button type="submit" [disabled]="!vehicleForm.valid" class="btn btn-primary">Submit</button>
+            <button *ngIf = "_vehicle.id" class="btn btn-danger" type="button" (click) = "deleteVehicle()">Delete</button>
         </form>
     </div>
     <div class="col-sm-6 col-xs-12">
         <pre>
             {{ vehicleForm.value | json }} {{ vehicleForm.valid | json }}
         </pre>
+        <p>{{ vehicleForm.get('features').value.includes(1) }}</p>
     </div>
 </div>

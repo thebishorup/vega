@@ -43,6 +43,7 @@ Raven
             { path: 'counter', component: CounterComponent },
             { path: 'fetch-data', component: FetchDataComponent },
             { path: 'add-vehicle', component: AddvehicleComponent },
+            { path: 'edit-vehicle/:id', component: AddvehicleComponent },
             { path: '**', redirectTo: 'home' }
         ])
     ]
