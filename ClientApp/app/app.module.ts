@@ -13,6 +13,7 @@ import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CounterComponent } from './components/counter/counter.component';
 import { AddvehicleComponent } from "./components/addvehicle/addvehicle.component";
 import { VehicleService } from "./components/addvehicle/vehicle.service";
+import { VehicleListsComponent } from "./components/vehicle-list/vehicle-list.component";
 
 //Configure Raven for Error logging
 Raven
@@ -27,7 +28,8 @@ Raven
         CounterComponent,
         FetchDataComponent,
         HomeComponent,
-        AddvehicleComponent
+        AddvehicleComponent,
+        VehicleListsComponent
     ],
     providers: [
         { provide: ErrorHandler, useClass: AppErrorHandler },
@@ -38,13 +40,14 @@ Raven
         ReactiveFormsModule,
         FormsModule,
         RouterModule.forRoot([
-            { path: '', redirectTo: 'home', pathMatch: 'full' },
+            { path: '', redirectTo: 'vehicle-lists', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
             { path: 'counter', component: CounterComponent },
             { path: 'fetch-data', component: FetchDataComponent },
             { path: 'add-vehicle', component: AddvehicleComponent },
             { path: 'edit-vehicle/:id', component: AddvehicleComponent },
-            { path: '**', redirectTo: 'home' }
+            { path: 'vehicle-lists', component: VehicleListsComponent },
+            { path: '**', redirectTo: 'vehicle-lists' }
         ])
     ]
 })

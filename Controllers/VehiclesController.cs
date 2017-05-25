@@ -21,10 +21,10 @@ namespace vega.Controllers
             _mapper = mapper;
         }
 
-        public IEnumerable<SaveVehicleViewModel> GetVehicles()
+        public async Task<IEnumerable<VehicleViewModel>> GetVehicles()
         {
-            List<Vehicle> vehicles = new List<Vehicle>(_unitOfWork.Vehicles.GetAll());
-            return _mapper.Map<List<Vehicle>, List<SaveVehicleViewModel>>(vehicles);
+            var vehicles = await _unitOfWork.Vehicles.GetVehiclesAsync();
+            return _mapper.Map<IEnumerable<Vehicle>, IEnumerable<VehicleViewModel>>(vehicles);
         }
 
         [HttpGet("{id}")]

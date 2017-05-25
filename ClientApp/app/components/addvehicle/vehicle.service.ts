@@ -27,8 +27,13 @@ export class VehicleService {
         ).catch(this.handleError);
     }
 
+    getVehicles() {
+        return this._http.get('/api/vehicles')
+            .map(response => response.json())
+            .catch(this.handleError);
+    }
+
     getVehicle(id: number) {
-        console.log(id);
         return this._http.get('/api/vehicles/' + id)
             .map(response => response.json())
             .catch(this.handleError);
