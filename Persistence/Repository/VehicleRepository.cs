@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using vega.Data.Repository;
@@ -34,14 +35,20 @@ namespace vega.Persistence.Repository
             .SingleOrDefaultAsync(v => v.Id == id);
         }
 
-        async Task<IEnumerable<Vehicle>> IVehicleRepository.GetVehiclesAsync()
+        async Task<IEnumerable<Vehicle>> IVehicleRepository.GetVehiclesAsync(Filter filter)
         {
-            return await VegaDbContext.Vehicles
+
+            var query = VegaDbContext.Vehicles
             .Include(f => f.Features)
                 .ThenInclude(vf => vf.Feature)
             .Include(m => m.Model)
                 .ThenInclude(m => m.Make)
-            .ToListAsync();
+            .AsQueryable();
+
+            if(filter.MakeId.HasValue)
+                query = query.Where(v => v.Model.MakeId == filter.MakeId.Value);       
+
+            return await query.ToListAsync();     
         }
     }
 }

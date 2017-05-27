@@ -27,10 +27,22 @@ export class VehicleService {
         ).catch(this.handleError);
     }
 
-    getVehicles() {
-        return this._http.get('/api/vehicles')
+    getVehicles(filter) {
+        return this._http.get('/api/vehicles' + '?' + this.toQueryString(filter))
             .map(response => response.json())
             .catch(this.handleError);
+    }
+
+    toQueryString(obj) {
+        var parts = [];
+        for(var property in obj) {
+            var value = obj[property];
+            if(value != null && value != undefined){
+                parts.push(encodeURIComponent(property) + '=' + encodeURIComponent(value));
+            }
+        }
+
+        return parts.join('&');
     }
 
     getVehicle(id: number) {
