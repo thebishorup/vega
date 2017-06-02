@@ -1,3 +1,4 @@
+import { PaginationComponent } from './components/common/pagination.component';
 import { ErrorHandler } from '@angular/core';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -29,7 +30,8 @@ Raven
         FetchDataComponent,
         HomeComponent,
         AddvehicleComponent,
-        VehicleListsComponent
+        VehicleListsComponent,
+        PaginationComponent
     ],
     providers: [
         { provide: ErrorHandler, useClass: AppErrorHandler },

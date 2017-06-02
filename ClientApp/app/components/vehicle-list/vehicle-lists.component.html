@@ -54,3 +54,13 @@
 </div>
 
 <!--Vehicles Table: End-->
+
+<!--Paginations: Start-->
+
+<div class="row">
+    <div class="col-sm-12">
+        <pagination [total-items] = "totalItems" [page-size] = "query.pageSize" (page-changed) = "onPageChanged($event)"></pagination>
+    </div>
+</div>
+
+<!--Paginations: End-->

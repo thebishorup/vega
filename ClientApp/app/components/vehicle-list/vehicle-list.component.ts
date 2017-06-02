@@ -9,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 
 export class VehicleListsComponent implements OnInit {
 
+    private readonly PAGE_SIZE = 3;
     _vehicles: IVehicle[];
     _make;
-    query: any = {};
+    query: any = {
+        pageSize: this.PAGE_SIZE
+    };
     columns = [
         { title: 'Id' },
         { title: 'Make', key: 'make', isSortable: true },
@@ -19,6 +22,7 @@ export class VehicleListsComponent implements OnInit {
         { title: 'Contact Name', key: 'contactName', isSortable: true },
         {  }
     ];
+    totalItems;
 
     constructor(private _vehicleService: VehicleService) { }
 
@@ -31,16 +35,23 @@ export class VehicleListsComponent implements OnInit {
 
     private populateVehicles() {
         this._vehicleService.getVehicles(this.query)
-            .subscribe(vehicles => this._vehicles = vehicles);
+            .subscribe(vehicles => {
+                this._vehicles = vehicles.items;
+                this.totalItems = vehicles.totalItems;
+            });
     }
 
     onFilterChange() {
+        this.query.page = 1;
         this.populateVehicles();
     }
 
     resetFilter() {
-        this.query = {};
-        this.onFilterChange();
+        this.query = {
+            page: 1,
+            pageSize: this.PAGE_SIZE
+        };
+        this.populateVehicles();
     }
 
     sortBy(columnName) {
@@ -50,6 +61,11 @@ export class VehicleListsComponent implements OnInit {
             this.query.sortBy = columnName;
             this.query.isSortAscending = true;
         }
+        this.populateVehicles();
+    }
+
+    onPageChanged(page) {
+        this.query.page = page;
         this.populateVehicles();
     }
 }

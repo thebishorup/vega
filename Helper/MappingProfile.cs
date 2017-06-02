@@ -11,6 +11,7 @@ public class MappingProfile : Profile
     public MappingProfile()
     {
         //Domain to API ViewModel
+        CreateMap(typeof(QueryResult<>), typeof(QueryResultViewModel<>));
         CreateMap<Make, MakeViewModel>();
         CreateMap<Modle, KeyValuePairViewModel>();
         CreateMap<Make, KeyValuePairViewModel>();
