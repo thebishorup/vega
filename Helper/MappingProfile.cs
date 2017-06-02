@@ -24,7 +24,7 @@ public class MappingProfile : Profile
             .ForMember(vr => vr.Features, opt => opt.MapFrom(v => v.Features.Select(vf => new KeyValuePairViewModel { Id = vf.FeatureId, Name = vf.Feature.Name })));
 
         //API ViewModel to Domain Model
-        CreateMap<FilterViewModel, Filter>();
+        CreateMap<VehicleQueryViewModel, VehicleQuery>();
         CreateMap<SaveVehicleViewModel, Vehicle>()
             .ForMember(v => v.Id, opt => opt.Ignore())
             .ForMember(v => v.ContactName, opt => opt.MapFrom(vr => vr.Contact.Name))

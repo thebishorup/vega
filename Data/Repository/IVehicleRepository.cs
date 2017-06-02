@@ -8,6 +8,6 @@ namespace vega.Data.Repository
     {
          Task<Vehicle> GetVehicleAsync(int id);
          Task<Vehicle> GetAsync(int id);
-         Task<IEnumerable<Vehicle>> GetVehiclesAsync(Filter filter);
+         Task<IEnumerable<Vehicle>> GetVehiclesAsync(VehicleQuery filter);
     }
 }

@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using vega.Data.Repository;
+using vega.Extensions;
 using vega.Model;
 using Vega.Data;
 
@@ -35,7 +37,7 @@ namespace vega.Persistence.Repository
             .SingleOrDefaultAsync(v => v.Id == id);
         }
 
-        async Task<IEnumerable<Vehicle>> IVehicleRepository.GetVehiclesAsync(Filter filter)
+        async Task<IEnumerable<Vehicle>> IVehicleRepository.GetVehiclesAsync(VehicleQuery queryObject)
         {
 
             var query = VegaDbContext.Vehicles
@@ -45,8 +47,18 @@ namespace vega.Persistence.Repository
                 .ThenInclude(m => m.Make)
             .AsQueryable();
 
-            if(filter.MakeId.HasValue)
-                query = query.Where(v => v.Model.MakeId == filter.MakeId.Value);       
+            if(queryObject.MakeId.HasValue)
+                query = query.Where(v => v.Model.MakeId == queryObject.MakeId.Value);     
+
+            //TODO: Implement sortigLogic here
+            var columnMap = new Dictionary<string, Expression<Func<Vehicle, object>>>()
+            {
+                ["make"] = v => v.Model.Make.Name,
+                ["model"] = v => v.Model.Name,
+                ["contactName"] = v => v.ContactName
+            };
+
+            query = query.ApplyOrdering(queryObject, columnMap);
 
             return await query.ToListAsync();     
         }

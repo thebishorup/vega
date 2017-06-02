@@ -21,9 +21,9 @@ namespace vega.Controllers
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<VehicleViewModel>> GetVehicles(FilterViewModel filterViewModel)
+        public async Task<IEnumerable<VehicleViewModel>> GetVehicles(VehicleQueryViewModel filterViewModel)
         {
-            var filter = _mapper.Map<FilterViewModel, Filter>(filterViewModel);
+            var filter = _mapper.Map<VehicleQueryViewModel, VehicleQuery>(filterViewModel);
             var vehicles = await _unitOfWork.Vehicles.GetVehiclesAsync(filter);
             return _mapper.Map<IEnumerable<Vehicle>, IEnumerable<VehicleViewModel>>(vehicles);
         }
