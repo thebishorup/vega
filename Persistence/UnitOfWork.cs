@@ -17,6 +17,7 @@ namespace vega.Persistence
             Models = new ModelRepository(this.context);
             Features = new FeatureRepository(this.context);
             Vehicles = new VehicleRepository(this.context);
+            Photos = new PhotoRepository(this.context);
         }
         public IMakeRepository Makes { get; private set; }
 
@@ -24,6 +25,7 @@ namespace vega.Persistence
 
         public IFeatureRepository Features { get; private set; }   
         public IVehicleRepository Vehicles { get; private set; }     
+        public IPhotoRepository Photos { get; set; }
 
         async Task<int> IUnitOfWork.CompleteAsync()
         {

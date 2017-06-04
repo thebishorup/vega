@@ -13,6 +13,7 @@ using AutoMapper;
 using Vega.Data;
 using vega.Data;
 using vega.Persistence;
+using vega.Model;
 
 namespace WebApplicationBasic
 {
@@ -44,6 +45,7 @@ namespace WebApplicationBasic
 
             // Register application services
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.Configure<PhotoSettings>(Configuration.GetSection("PhotoSettings"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

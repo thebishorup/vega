@@ -60,6 +60,24 @@ namespace Vega.Migrations
                     b.ToTable("Modles");
                 });
 
+            modelBuilder.Entity("vega.Model.Photo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasMaxLength(255);
+
+                    b.Property<int?>("VehicleId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("VehicleId");
+
+                    b.ToTable("Photos");
+                });
+
             modelBuilder.Entity("vega.Model.Vehicle", b =>
                 {
                     b.Property<int>("Id")
@@ -115,6 +133,13 @@ namespace Vega.Migrations
                         .WithMany("Models")
                         .HasForeignKey("MakeId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("vega.Model.Photo", b =>
+                {
+                    b.HasOne("vega.Model.Vehicle")
+                        .WithMany("Photos")
+                        .HasForeignKey("VehicleId");
                 });
 
             modelBuilder.Entity("vega.Model.Vehicle", b =>

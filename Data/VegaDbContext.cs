@@ -15,6 +15,7 @@ namespace Vega.Data
         public DbSet<Modle> Models { get; set; }
         public DbSet<Feature> Features { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
+        public DbSet<Photo> Photos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -26,6 +27,7 @@ namespace Vega.Data
             builder.Entity<Feature>().ToTable("Features");
             builder.Entity<Vehicle>().ToTable("Vehicles");
             builder.Entity<VehicleFeature>().ToTable("VehicleFeatures");
+            builder.Entity<Photo>().ToTable("Photos");
 
             #region EF Relatiosnhips Configurations
             //Configure One-Many Relationship between Make & Model
@@ -82,6 +84,12 @@ namespace Vega.Data
                 .Property(v => v.Updatedby)
                 .HasMaxLength(255);
 
+
+            //Photo
+            builder.Entity<Photo>()
+                .Property(f => f.FileName)
+                .IsRequired()
+                .HasMaxLength(255);
             #endregion
         }
     }

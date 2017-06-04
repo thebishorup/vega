@@ -1,3 +1,7 @@
+import { BrowserXhr } from '@angular/http';
+import { ProgressService, BrowserXhrProgress } from './components/common/progress.service';
+import { PhotoService } from './components/view-vehicle/photo.service';
+import { ViewVehicleComponent } from './components/view-vehicle/view-vehicle.component';
 import { PaginationComponent } from './components/common/pagination.component';
 import { ErrorHandler } from '@angular/core';
 import { NgModule } from '@angular/core';
@@ -31,11 +35,15 @@ Raven
         HomeComponent,
         AddvehicleComponent,
         VehicleListsComponent,
-        PaginationComponent
+        PaginationComponent,
+        ViewVehicleComponent
     ],
     providers: [
         { provide: ErrorHandler, useClass: AppErrorHandler },
-        VehicleService
+        { provide: BrowserXhr, useClass: BrowserXhrProgress },
+        VehicleService,
+        PhotoService,
+        ProgressService
     ],
     imports: [
         UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.
@@ -49,6 +57,7 @@ Raven
             { path: 'add-vehicle', component: AddvehicleComponent },
             { path: 'edit-vehicle/:id', component: AddvehicleComponent },
             { path: 'vehicle-lists', component: VehicleListsComponent },
+            { path: 'vehicle-view/:id', component: ViewVehicleComponent },
             { path: '**', redirectTo: 'vehicle-lists' }
         ])
     ]

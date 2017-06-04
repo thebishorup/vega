@@ -10,6 +10,7 @@ namespace vega.Data
          IModelRepository Models { get; }
          IFeatureRepository Features { get; }
          IVehicleRepository Vehicles { get; }
+         IPhotoRepository Photos { get; }
 
          Task<int> CompleteAsync();
     }

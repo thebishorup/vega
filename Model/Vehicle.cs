@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Vega.Model;
 
 namespace vega.Model
@@ -9,6 +10,7 @@ namespace vega.Model
         public Vehicle()
         {
             Features = new List<VehicleFeature>();
+            Photos = new Collection<Photo>();
         }
         public int Id { get; set; }
         public int ModelId { get; set; }
@@ -24,5 +26,7 @@ namespace vega.Model
         public Modle Model { get; set; }
 
         public List<VehicleFeature> Features { get; set; }
+
+        public ICollection<Photo> Photos { get; set; }
     }
 }
